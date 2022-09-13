@@ -49,7 +49,7 @@ export default createStore({
         commit('SET_LOADING', true)
         let response = await singleCountry(country)
         const data= response.data
-        console.log(data)
+        // console.log(data)
         commit('SET_COUNTRY', data)
         commit('UPDATE_LIST', data)
 

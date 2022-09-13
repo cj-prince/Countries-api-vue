@@ -28,7 +28,7 @@
           <div class="name" > {{count.name.common}}</div>
           <div class="population">Population: {{count.population}}</div>
           <div class="population">Region: {{count.region}}</div>
-          <div class="population">Capital: {{count.capital}}</div>
+          <div class="population" v-for="cap in count.capital" :key="cap">Capital: {{cap}}</div>
         </div>
         </div>
       </div>
