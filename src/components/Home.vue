@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <div class="top"  >
-      <form class="input-container"  @submit.prevent="">
+      <form class="input-container"  @submit.prevent="search">
         <i class="fa fa-search" aria-hidden="true"></i>
         <input type="text" v-model="searchKeyword" placeholder="Search for a country... " >
       </form>
@@ -53,7 +53,7 @@ export default {
   methods:{
     ...mapActions(['fetchCountry','fetchSingleCountry']),
     search(){
-      this.fetchCountry(this.searchKeyword)
+      this.fetchSingleCountry(this.searchKeyword)
     },
     goToCountry(name){
       this.$router.push(`/${name}`)
@@ -68,12 +68,9 @@ export default {
       this.fetchCountry(this.region)
     },
 
-    // searchKeyword: function searchKeyword() {
-    //     this.fetchSingleCountry(this.searchKeyword);
-    // }
-    //  searchKeyword: function searchKeyword() {
-    //     this.fetchCountry(this.searchKeyword);
-    // }
+    searchKeyword: function searchKeyword() {
+        this.fetchSingleCountry(this.searchKeyword);
+    }
   },
 
   mounted() {
@@ -168,5 +165,17 @@ export default {
 
   .population{
     font-weight: 800;
+  }
+
+  @media (max-width: 600px) {
+    .top{
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .selector{
+      width: 86px;
+    }
   }
 </style>

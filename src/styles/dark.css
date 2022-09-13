@@ -1,0 +1,6 @@
+:root.true{
+  --bg: hsl(209, 23%, 22%);
+  --text: white;
+  --input-color: hsl(0, 0%, 52%);
+  --narbar-bg-color: hsl(0, 4%, 17%);
+}

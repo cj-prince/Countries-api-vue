@@ -6,16 +6,12 @@ export default createStore({
     countryList: [],
     countries: null,
     loading: false,
-    error: null,
   },
   getters: {
   },
   mutations: {
     UPDATE_LIST(state, countries) {
       state.countries = countries;
-    },
-    SET_ERROR(state, errorMessage){
-      state.error =errorMessage
     },
     SET_LOADING(state, loadingState){
       state.loading = loadingState
@@ -35,7 +31,7 @@ export default createStore({
           const data =  response?.data
           // console.log(data)
           commit('UPDATE_LIST', data)
-        }else {
+        }else{
           response = await getCountry()
           const data = response?.data
           // console.log(data)
@@ -52,9 +48,10 @@ export default createStore({
       try {
         commit('SET_LOADING', true)
         let response = await singleCountry(country)
-        const data= response?.data
+        const data= response.data
         console.log(data)
         commit('SET_COUNTRY', data)
+        commit('UPDATE_LIST', data)
 
       } catch (error) {
         console.log(error)

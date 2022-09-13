@@ -13,7 +13,7 @@ import { mapState } from 'vuex';
           <h1 class="title">{{county?.name?.common}}</h1>
           <div class="side-content">
             <div class="side-1">
-              <p><span class="bold">Native name: </span> {{county?.name.nativeName.spa.official}}</p>
+              <p><span class="bold">Native name: </span> {{Object.values(county.name.nativeName)[0].common}}</p>
               <p>
                 <span class="bold">Population:</span>
                 {{ county?.population }}
@@ -38,7 +38,7 @@ import { mapState } from 'vuex';
               </p>
               <p>
                 <span class="bold">Currencies:</span>
-                {{ county?.currencies.GTQ.name }}
+                {{Object.values(county.currencies)[0].name }}
               </p>
               <p>
                 <span class="bold">Languages:</span>
@@ -47,7 +47,7 @@ import { mapState } from 'vuex';
             </div>
           </div>
            <div class="side-3">
-            <span class="bold">Border Countries:</span>  <span class="border" v-for="g in county.borders.toString()" :key="g">{{g}} </span>
+            <span class="bold">Border Countries:</span>  <span class="border" v-for="g in county.borders" :key="g">{{g}} </span>
             </div>
         </div>
         
@@ -133,6 +133,22 @@ export default {
     align-items: center;
   }
   .border{
-   
+    display: inline-flex;
+    background-color: white;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+    padding: 0.5rem;
+    margin: 0.5rem;
+  }
+  @media (max-width: 600px) {
+    .poster{
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .side-content{
+      display: flex;
+      flex-direction: column;
+    }
   }
 </style>
