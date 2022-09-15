@@ -33,7 +33,6 @@ export default createStore({
   },
   actions: {
     async fetchCountry({commit}, options){
-      console.log(options)
       try {
         commit('SET_LOADING', true)
         const {region, searchKeyword} = options
@@ -42,7 +41,6 @@ export default createStore({
         if(region){
           response = await getRegion(region)
           const data =  response.data
-          // console.log(data)
           commit('UPDATE_LIST', data)
         }else if (searchKeyword) {
           response = await singleCountry(searchKeyword)
@@ -52,7 +50,6 @@ export default createStore({
         else{
           response = await getCountry()
           const data = response?.data
-          // console.log(data)
           commit('UPDATE_LIST', data)
         }
       } catch (error) {
@@ -67,8 +64,6 @@ export default createStore({
         commit('SET_LOADING', true)
         let response = await singleCountry(country)
         const data= response.data
-        // console.log(data)
-        //  commit('UPDATE_LIST', data)
         commit('SET_COUNTRY', data)
        
 

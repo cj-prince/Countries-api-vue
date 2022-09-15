@@ -70,7 +70,6 @@ export default {
 
     searchKeyword: function searchKeyword() {
         this.fetchCountry({region:this.region, searchKeyword:this.searchKeyword});
-        console.log(searchKeyword)
     }
   },
 

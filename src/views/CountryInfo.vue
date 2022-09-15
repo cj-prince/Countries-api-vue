@@ -72,13 +72,9 @@ export default {
 
   },
   mounted(){
-    console.log(this.$route.params)
     const country= this.$route.params.country
     this.fetchCountry("")
     this.fetchSingleCountry(country)
-    setTimeout(() => {
-      console.log(this.countryCodeObj)
-    }, 3000)
   },
   methods:{
      ...mapActions(['fetchSingleCountry', 'fetchCountry']),
