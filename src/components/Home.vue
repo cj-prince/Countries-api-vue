@@ -13,7 +13,6 @@
           <option  value="Asia">Asia</option>
           <option  value="Europe">Europe</option>
           <option  value="Oceania">Oceania</option>
-          <option  value="Polar">Polar</option>
         </select>
       </div>
     </div>
@@ -53,7 +52,8 @@ export default {
   methods:{
     ...mapActions(['fetchCountry','fetchSingleCountry']),
     search(){
-      this.fetchSingleCountry(this.searchKeyword)
+      this.fetchCountry({region:this.region, searchKeyword:this.searchKeyword})
+      
     },
     goToCountry(name){
       this.$router.push(`/${name}`)
@@ -65,16 +65,17 @@ export default {
 
   watch:{
     region: function region(){
-      this.fetchCountry(this.region)
+      this.fetchCountry({region:this.region, searchKeyword:this.searchKeyword})
     },
 
     searchKeyword: function searchKeyword() {
-        this.fetchSingleCountry(this.searchKeyword);
+        this.fetchCountry({region:this.region, searchKeyword:this.searchKeyword});
+        console.log(searchKeyword)
     }
   },
 
   mounted() {
-    console.log('hello', this.fetchCountry())
+    this.fetchCountry({})
   },
 }
 </script>
