@@ -3,11 +3,22 @@ import { getCountry,getRegion,singleCountry} from '@/api/countryAll';
 
 export default createStore({
   state: {
-    countryList: [],
-    countries: null,
+    countryList: [], // Guatemala
+    countries: null, // GHana, Nigeria, USA
     loading: false,
   },
   getters: {
+    countryCodeObj(state){
+      const newObj = {};
+      const countries = state.countries;
+
+      countries.forEach((country) => {
+        const cca3 = country.cca3;
+        newObj[cca3] = country.name.common
+      })
+
+      return newObj
+    }
   },
   mutations: {
     UPDATE_LIST(state, countries) {
@@ -18,7 +29,7 @@ export default createStore({
     },
     SET_COUNTRY(state, countryList){
       state.countryList = countryList
-    }
+    },
   },
   actions: {
     async fetchCountry({commit}, options){
@@ -51,14 +62,16 @@ export default createStore({
         const data= response.data
         // console.log(data)
         commit('SET_COUNTRY', data)
-        commit('UPDATE_LIST', data)
+        // commit('UPDATE_LIST', data)
 
       } catch (error) {
         console.log(error)
       }finally {
         commit('SET_LOADING', false)
       }
-    }
+    },
+
+     
   
   },
   modules: {

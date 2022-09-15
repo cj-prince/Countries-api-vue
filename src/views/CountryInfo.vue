@@ -46,8 +46,13 @@ import { mapState } from 'vuex';
               </p>
             </div>
           </div>
-           <div class="side-3">
-            <span class="bold">Border Countries:</span>  <span class="border" v-for="g in county.borders" :key="g">{{g}} </span>
+          <div class="side-3">
+            <span class="bold">Border Countries:</span>  
+            <span class="border" v-for="code in county.borders" 
+              :key="code"
+              @click="findCountry(countryCodeObj[code])">
+              {{countryCodeObj[code]}} 
+            </span>
             </div>
         </div>
         
@@ -58,7 +63,8 @@ import { mapState } from 'vuex';
 
 
 <script>
-import {mapState, mapActions} from 'vuex'
+import {mapState, mapActions, mapGetters} from 'vuex'
+
 
 export default {
   name: 'SingleCountry',
@@ -68,18 +74,33 @@ export default {
   mounted(){
     console.log(this.$route.params)
     const country= this.$route.params.country
+    this.fetchCountry("")
     this.fetchSingleCountry(country)
+    setTimeout(() => {
+      console.log(this.countryCodeObj)
+    }, 3000)
   },
   methods:{
-     ...mapActions(['fetchSingleCountry']),
+     ...mapActions(['fetchSingleCountry', 'fetchCountry']),
     goBack(){
       this.$router.back()
+    },
+
+    findCountry(countryCode) {
+      this.fetchSingleCountry(countryCode)
+      this.$router.push(countryCode);
     }
   },
   computed: {
-    ...mapState(['loading', 'countryList'])
+    ...mapState(['loading', 'countryList']),
+    ...mapGetters(['countryCodeObj']),
+  },
+  watch:{
+    $route(){
+      const country= this.$route.params.country
+      this.fetchSingleCountry(country)
+    }
   }
-
 }
 </script>
 
@@ -135,9 +156,11 @@ export default {
   .border{
     display: inline-flex;
     background-color: white;
+    color: black;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
     padding: 0.5rem;
     margin: 0.5rem;
+    cursor: pointer;
   }
   @media (max-width: 600px) {
     .poster{
