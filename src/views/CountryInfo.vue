@@ -28,7 +28,7 @@ import { mapState } from 'vuex';
               </p>
               <p>
                 <span class="bold">Capital:</span>
-                {{ county?.capital.toString() }}
+                {{ county?.capital?.toString() }}
               </p>
             </div>
             <div class="side-2">
@@ -146,7 +146,6 @@ export default {
 
   .side-3{
     margin-top: 3rem;
-    display: flex;
     align-items: center;
   }
   .border{
